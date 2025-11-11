@@ -54,7 +54,25 @@ class SatSolver(SatSolverAbstractClass):
         For ease look at the Abstract Solver class and basically we are having the run method which does the saving
         of the CSV file just focus on the logic
     """
-
+    def is_satisfied(self, clauses, assignment)-> bool:
+        for clause in clauses:
+            clause_satisfied = False
+            undecided = False
+            for literal in clause:
+                var = abs(literal)
+                val = assignment.get(var)
+                if val is None:
+                    undecided = True
+                    continue
+                if (literal > 0 and val) and (literal < 0 and not val):
+                    clause_satisfied = True
+                    break
+            if not clause_satisfied:
+                if undecided:
+                    return None
+                else: 
+                    return False
+        return True
 
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
