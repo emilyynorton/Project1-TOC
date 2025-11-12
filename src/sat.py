@@ -64,7 +64,7 @@ class SatSolver(SatSolverAbstractClass):
                 if val is None:
                     undecided = True
                     continue
-                if (literal > 0 and val) and (literal < 0 and not val):
+                if (literal > 0 and val) or (literal < 0 and not val):
                     clause_satisfied = True
                     break
             if not clause_satisfied:
@@ -98,22 +98,27 @@ class SatSolver(SatSolverAbstractClass):
             return None
 
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        result = self.partial_check(clauses, {})
-        if result is True:
-            return True, assignment
-        if result is False:
-            return False, assignment
+        def backtrack(assignment):
+            result = self.partial_check(clauses, assignment)
+            if result is True:
+                return True, assignment.copy()
+            elif result is False:
+                return False, {}
+            
+            for var in range(1, n_vars + 1):
+                if var not in assignment:
+                    break
+                else: 
+                    return False, {}
         
-        for var in range(1, n_vars + 1):
-            if var not in assignment:
-                break
-        
-        for val in [True, False]:
-            assignment[var] = val
-            found, sol = self.sat_backtracking(n_vars, clauses)
-            if found:
-                return True, sol
-        return False, {}
+            for val in [True, False]:
+                assignment[var] = val
+                found, sol = backtrack(assignment)
+                if found:
+                    return True, sol
+                del assignment[var]
+            return False, {}
+        return backtrack({})
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
