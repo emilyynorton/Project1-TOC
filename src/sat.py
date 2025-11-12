@@ -78,12 +78,37 @@ class SatSolver(SatSolverAbstractClass):
         pass
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        n_assignments = 2**n_vars
-        assignments_list = itertools.product([True, False], repeat=n_vars)
-        for assignment in assignments_list:
+        boolean_combos = itertools.product([True, False], repeat=n_vars)
+        # set removes duplicates
+        # sorted makes it into a list for consistency
+        all_variables = sorted(set(abs(literal) for clause in clauses for literal in clause))
+
+        for booleans in boolean_combos:
             variable_assignments = {}
-            for i in range(len(assignment)):
-                variable_assignments[i+1] = assignment[i]
+            for index, var in enumerate(all_variables):
+                variable_assignments[var] = booleans[index]
+                
+            all_satisfied = True
+
+            for clause in clauses:
+                clause_satisfied = False
+                for literal in clause:
+                    if (variable_assignments[abs(literal)] and literal > 0) or (not variable_assignments[abs(literal)] and literal < 0):
+                        clause_satisfied = True
+                        break # go to next clause
+                              # only one of the variables needs to be true because of the "or" in CNF
+                              # True and -False evaluate to True
+                              # as soon as you see one of those, that segment is true
+                if clause_satisfied == False:
+                    all_satisfied = False
+                    break # as soon as one entire clause is false, the "and" makes the whole thing false
+  
+            if all_satisfied == True:
+                return True, variable_assignments.copy()
+
+        return False, {}
+
+
 
 
     def sat_bestcase(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
