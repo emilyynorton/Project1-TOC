@@ -64,7 +64,7 @@ class SatSolver(SatSolverAbstractClass):
                 if val is None:
                     undecided = True
                     continue
-                if (literal > 0 and val) and (literal < 0 and not val):
+                if (literal > 0 and val) or (literal < 0 and not val):
                     clause_satisfied = True
                     break
             if not clause_satisfied:
@@ -74,8 +74,51 @@ class SatSolver(SatSolverAbstractClass):
                     return False
         return True
 
+    def partial_check(self, clauses, assignment):
+        all_satisfied = True
+        for clause in clauses:
+            clause_satisfied = False
+            undecided = False
+            for literal in clause:
+                var = abs(literal)
+                sign = literal > 0
+                if var in assignment:
+                    if assignment[var] == sign:
+                        clause_satisfied = True
+                        break
+                else:
+                    undecided = True
+            if not clause_satisfied:
+                if not undecided:
+                    return False
+                all_satisfied = False
+        if all_satisfied:
+            return True
+        else:
+            return None
+
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        def backtrack(assignment):
+            result = self.partial_check(clauses, assignment)
+            if result is True:
+                return True, assignment.copy()
+            elif result is False:
+                return False, {}
+            
+            for var in range(1, n_vars + 1):
+                if var not in assignment:
+                    break
+                else: 
+                    return False, {}
+        
+            for val in [True, False]:
+                assignment[var] = val
+                found, sol = backtrack(assignment)
+                if found:
+                    return True, sol
+                del assignment[var]
+            return False, {}
+        return backtrack({})
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
