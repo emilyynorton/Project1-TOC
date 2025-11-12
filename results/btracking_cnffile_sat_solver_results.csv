@@ -1,4 +1,4 @@
 instance_id,n_vars,n_clauses,method,satisfiable,time_seconds,solution
-3,4,10,BackTracking,U,1.0415911674499512e-05,{}
-4,4,10,BackTracking,U,6.500165909528732e-06,{}
-5,4,10,BackTracking,U,4.624947905540466e-06,{}
+3,4,10,BackTracking,U,1.383305061608553e-05,{}
+4,4,10,BackTracking,U,9.834009688347578e-06,{}
+5,4,10,BackTracking,U,7.459020707756281e-06,{}
