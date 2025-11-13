@@ -11,7 +11,7 @@ from src.helpers.dmaics_parser import parse_multi_instance_dimacs
 dir_path = os.path.join(project_root, "input")
 files = os.listdir(dir_path)
 
-file = "kSAT2.cnf"
+file = "cnffile.cnf"
 path = os.path.join(dir_path, file)
 solver = SatSolver(path)
 solver.run()
@@ -24,8 +24,8 @@ points = [[],[],[]]
 # Get the actual file names based on the naming convention used by save_results
 results_dir = os.path.join(project_root, "results")
 file_name_only = os.path.splitext(file)[0]  # "cnffile"
-output_bf = os.path.join(results_dir, f"brute_force_{file_name_only}_sat_solver_results.csv")
-output_btrack = os.path.join(results_dir, f"btracking_{file_name_only}_sat_solver_results.csv")
+output_bf = os.path.join(results_dir, f"brute_force_{file_name_only}_sat_solver_results_belugas.csv")
+output_btrack = os.path.join(results_dir, f"btracking_{file_name_only}_sat_solver_results_belugas.csv")
 
 with open(output_bf) as f:
     next(f)  # Skip header line
