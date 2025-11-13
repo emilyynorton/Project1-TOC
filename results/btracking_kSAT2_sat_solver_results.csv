@@ -1,0 +1,42 @@
+instance_id,n_vars,n_clauses,method,satisfiable,time_seconds,solution
+1,4,10,BackTracking,U,2.8708018362522125e-05,{}
+2,4,10,BackTracking,S,2.3749948013573885e-05,"{1: False, 2: True, 3: True, 4: True}"
+3,4,10,BackTracking,U,2.0792009308934212e-05,{}
+4,4,10,BackTracking,S,1.0208983439952135e-05,"{1: True, 2: True, 3: True, 4: False}"
+5,4,10,BackTracking,S,1.1707947123795748e-05,"{1: False, 2: False, 3: True, 4: True}"
+6,4,10,BackTracking,S,7.4169947765767574e-06,"{1: True, 2: True, 3: True, 4: True}"
+7,4,10,BackTracking,S,1.4249992091208696e-05,"{1: False, 2: False, 3: True, 4: False}"
+8,4,10,BackTracking,U,2.174999099224806e-05,{}
+9,4,10,BackTracking,U,7.833004929125309e-06,{}
+10,4,10,BackTracking,U,2.116599353030324e-05,{}
+11,8,16,BackTracking,U,8.879101369529963e-05,{}
+12,8,16,BackTracking,U,0.00018958403961732984,{}
+13,8,16,BackTracking,S,3.491598181426525e-05,"{1: True, 2: False, 3: False, 4: False, 5: True, 6: True, 7: True, 8: False}"
+14,8,16,BackTracking,S,6.933399708941579e-05,"{1: False, 2: True, 3: False, 4: True, 5: True, 6: True, 7: True, 8: True}"
+15,8,16,BackTracking,U,0.000108207983430475,{}
+16,8,16,BackTracking,U,5.662499461323023e-05,{}
+17,8,16,BackTracking,S,4.454201553016901e-05,"{1: True, 2: False, 3: False, 4: False, 5: False, 6: False, 7: True, 8: False}"
+18,8,16,BackTracking,U,0.0001244159648194909,{}
+19,8,16,BackTracking,S,2.479198155924678e-05,"{1: False, 2: True, 3: True, 4: False, 5: True, 6: True, 7: True, 8: False}"
+20,8,16,BackTracking,S,2.0249979570508003e-05,"{1: True, 2: True, 3: True, 4: False, 5: True, 6: True, 7: True, 8: True}"
+21,12,24,BackTracking,S,4.754198016598821e-05,"{1: True, 2: True, 3: True, 4: False, 5: True, 6: True, 7: True, 8: False, 9: True, 10: True, 11: True, 12: False}"
+22,12,24,BackTracking,S,0.0003042080206796527,"{1: True, 2: False, 3: False, 4: True, 5: False, 6: False, 7: False, 8: True, 9: True, 10: True, 11: False, 12: False}"
+23,12,24,BackTracking,U,0.00035920803202316165,{}
+24,12,24,BackTracking,U,0.00014349998673424125,{}
+25,12,24,BackTracking,S,4.520901711657643e-05,"{1: True, 2: False, 3: True, 4: True, 5: True, 6: False, 7: True, 8: True, 9: False, 10: True, 11: False}"
+26,12,24,BackTracking,U,0.00042637501610442996,{}
+27,12,24,BackTracking,U,0.0001769589725881815,{}
+28,12,24,BackTracking,S,0.0001842080382630229,"{1: True, 2: False, 3: True, 4: False, 5: True, 6: False, 7: False, 8: True, 9: True, 10: True, 11: True, 12: True}"
+29,12,24,BackTracking,U,0.0006296249921433628,{}
+30,12,24,BackTracking,S,0.0005194999976083636,"{1: False, 2: False, 3: True, 4: True, 5: False, 6: True, 7: True, 8: True, 9: True, 10: True, 11: True, 12: False}"
+31,16,32,BackTracking,S,0.0009718749788589776,"{1: True, 2: False, 3: False, 4: True, 5: False, 6: True, 7: True, 8: False, 9: True, 10: True, 11: True, 12: True, 13: True, 14: True, 15: False, 16: False}"
+32,16,32,BackTracking,U,0.0003185420064255595,{}
+33,16,32,BackTracking,S,0.0008510830230079591,"{1: False, 2: True, 3: False, 4: True, 5: False, 6: True, 7: False, 8: True, 9: True, 10: True, 11: False, 12: True, 13: True, 14: True, 15: True, 16: True}"
+34,16,32,BackTracking,S,0.00022124999668449163,"{1: True, 2: True, 3: True, 4: True, 5: True, 6: True, 7: False, 8: True, 9: False, 10: True, 11: True, 12: False, 13: True, 14: True, 15: True, 16: True}"
+35,16,32,BackTracking,U,0.0004285000031813979,{}
+36,16,32,BackTracking,S,0.0005164999747648835,"{1: True, 2: True, 3: False, 4: True, 5: True, 6: False, 7: True, 8: True, 9: True, 10: True, 11: True, 12: True, 13: False, 14: True, 15: True, 16: True}"
+37,16,32,BackTracking,U,0.00040204095421358943,{}
+38,16,32,BackTracking,U,0.00136058300267905,{}
+39,16,32,BackTracking,S,0.00019995798356831074,"{1: True, 2: False, 3: True, 4: True, 5: False, 6: False, 7: True, 8: False, 9: True, 10: False, 11: True, 12: True, 13: False, 14: False, 15: True, 16: False}"
+40,16,32,BackTracking,U,0.0023776660091243684,{}
+41,18,36,BackTracking,U,0.001328666985500604,{}
