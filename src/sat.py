@@ -57,28 +57,38 @@ class SatSolver(SatSolverAbstractClass):
     """
 
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
+        # Create recursive function 
         def backtrack(assignment):
             all_satisfied = True
             for clause in clauses:
-                clause_satisfied = False
-                undecided = False
+                clause_satisfied = False    # If clause is true
+                undecided = False           # If there are unassigned vars in clause
                 for literal in clause:
                     var = abs(literal)
-                    sign = literal > 0
+
+                    # If the variable hasn't been assigned, make undecided true
                     if var not in assignment:
                         undecided = True
                         continue
-                    val=assignment[var]
+                    
+                    # Check the literal w/ curr assignment
+                    val = assignment[var]
                     if (literal > 0 and val) or (literal < 0 and not val):
                         clause_satisfied = True
                         break
+                
+                # If all vars have been assigned and not satisfied, return False
                 if not clause_satisfied:
                     if not undecided:
                         return False, {}
                     all_satisfied = False
 
+            # Base case -- when all satisfied
             if all_satisfied:
                 return True, assignment.copy()
+            
+            # Find next unassigned variable
+            next_var = None
             for var in range(1, n_vars + 1):
                 if var not in assignment:
                     break
