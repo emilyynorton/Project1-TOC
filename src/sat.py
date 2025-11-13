@@ -45,6 +45,7 @@ from src.helpers.sat_solver_helper import SatSolverAbstractClass
 import itertools
 
 
+
 class SatSolver(SatSolverAbstractClass):
 
     """
@@ -58,7 +59,6 @@ class SatSolver(SatSolverAbstractClass):
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         # Create recursive function 
         def backtrack(assignment):
-            # Check if all clauses are satisfied
             all_satisfied = True
             for clause in clauses:
                 clause_satisfied = False    # If clause is true
@@ -91,54 +91,64 @@ class SatSolver(SatSolverAbstractClass):
             next_var = None
             for var in range(1, n_vars + 1):
                 if var not in assignment:
-                    next_var = var
                     break
-            
-            # If all vars assigned but not all clauses satisfied, return False
-            if next_var is None:
-                return False, {}
+                else:
+                    return False, {}
 
-            # Try assigning true then false
             for val in [True, False]:
-                assignment[next_var] = val
+                assignment[var] = val
                 found, sol = backtrack(assignment)
                 if found:
                     return True, sol
-                del assignment[next_var]
+                del assignment[var]
             
             return False, {}
 
         return backtrack({})
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
+        # create all possible combinations of True, False corresponding to the number of variables in SAT problem
         boolean_combos = itertools.product([True, False], repeat=n_vars)
-        # set removes duplicates
-        # sorted makes it into a list for consistency
+
+        # extract set of variables from problem (using set removes duplicates and sorted creates consistent list)
         all_variables = sorted(set(abs(literal) for clause in clauses for literal in clause))
 
+        # check each set of T/F assignments
         for booleans in boolean_combos:
+            # assign T/F to variable in SAT problem
+            # store in variable assignments dictionary with variable name as key
             variable_assignments = {}
             for index, var in enumerate(all_variables):
                 variable_assignments[var] = booleans[index]
                 
+            # start by assuming all clauses in SAT problem are true
             all_satisfied = True
 
+            # check if each individual clause is true
             for clause in clauses:
+                # start by assuming individual clause is false
                 clause_satisfied = False
+                # check each literal
                 for literal in clause:
+                    # get T/F assignment from variable assignments dictionary
+                    # var is T and var is not negative = T
+                    # var is F and var is negative = -F = T
                     if (variable_assignments[abs(literal)] and literal > 0) or (not variable_assignments[abs(literal)] and literal < 0):
+                        # as soon as one literal in a clause is true, the whole clause is true because CNF uses "or" within clauses
                         clause_satisfied = True
                         break # go to next clause
-                              # only one of the variables needs to be true because of the "or" in CNF
-                              # True and -False evaluate to True
-                              # as soon as you see one of those, that segment is true
+            
+                # case where no variable in the clause is true
                 if clause_satisfied == False:
+                    # clauses are connected by "and" in CNF, so if one clause is false, the whole statement is false
                     all_satisfied = False
-                    break # as soon as one entire clause is false, the "and" makes the whole thing false
+                    break
   
+            # if a solution was found, return solution
             if all_satisfied == True:
                 return True, variable_assignments.copy()
 
+        # no solution found
         return False, {}
 
 
